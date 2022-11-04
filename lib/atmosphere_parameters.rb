@@ -55,25 +55,26 @@ class AtmosphereParameters
   end
 
   def temperature
-    @t1 + @betta * (geopotential_height - @h1)
+    @t1 + @betta * (@parameter_geopotential_height - @h1)
   end
 
   def pressure
     if @betta == 0
-      lgp = Math::log10(@p1) - 0.434294 * G_0 * (geopotential_height - @h1) / (R_CONST * temperature)
+      lgp = Math::log10(@p1) - 0.434294 * G_0 * (@parameter_geopotential_height - @h1) /
+        (R_CONST * @parameter_temperature)
     else
-      lgp = Math::log10(@p1) - G_0 * Math::log10(temperature / @t1) / (R_CONST * @betta)
+      lgp = Math::log10(@p1) - G_0 * Math::log10(@parameter_temperature / @t1) / (R_CONST * @betta)
     end
 
     10 ** lgp
   end
 
   def sound_velocity
-    20.0468 * temperature ** (0.5)
+    20.0468 * @parameter_temperature ** (0.5)
   end
 
   def density
-    pressure / (R_CONST * temperature)
+    @parameter_pressure / (R_CONST * @parameter_temperature)
   end
 
   def show
