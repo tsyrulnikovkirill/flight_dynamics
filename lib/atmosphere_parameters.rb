@@ -1,5 +1,6 @@
 class AtmosphereParameters
-  attr_accessor :height
+  attr_accessor :height, :parameter_geopotential_height, :parameter_acceleration_free_fall, :parameter_temperature,
+                :parameter_pressure, :parameter_density, :parameter_sound_velocity
 
   RADIUS = 6356767.0  # условный радиус Земли в метрах
   G_0 = 9.80665  # ускорение свободного падения на уровне моря
@@ -35,6 +36,12 @@ class AtmosphereParameters
     @betta = constants['betta']
     @h1 = constants['h1']
     @p1 = constants['p1']
+    @parameter_geopotential_height = geopotential_height
+    @parameter_acceleration_free_fall = acceleration_free_fall
+    @parameter_temperature = temperature
+    @parameter_pressure = pressure
+    @parameter_density = density
+    @parameter_sound_velocity = sound_velocity
   end
 
   # получение геопотенциальной высоты
@@ -69,14 +76,14 @@ class AtmosphereParameters
     pressure / (R_CONST * temperature)
   end
 
-  def to_s
+  def show
     output_parameters = []
-    output_parameters << "Геопотенциальная высота: #{geopotential_height.round(0)}"
-    output_parameters << "Кинетическая температура: #{temperature.round(3)}"
-    output_parameters << "Давление: #{pressure.round(2)}"
-    output_parameters << "Плотность: #{density.round(5)}" #нужно быть аккуратным при большой высоте - округляет до 1.0e-05
-    output_parameters << "Ускорение свободного падения: #{acceleration_free_fall.round(4)}"
-    output_parameters << "Скорость звука: #{sound_velocity.round(2)}"
+    output_parameters << "Геопотенциальная высота: #{@parameter_geopotential_height.round(0)}"
+    output_parameters << "Кинетическая температура: #{@parameter_temperature.round(3)}"
+    output_parameters << "Давление: #{@parameter_pressure.round(2)}"
+    output_parameters << "Плотность: #{@parameter_density.round(5)}" #нужно быть аккуратным при большой высоте - округляет до 1.0e-05
+    output_parameters << "Ускорение свободного падения: #{@parameter_acceleration_free_fall.round(4)}"
+    output_parameters << "Скорость звука: #{@parameter_sound_velocity.round(2)}"
 
     output_parameters
   end
