@@ -70,11 +70,14 @@ class AtmosphereParameters
   end
 
   def to_s
-    puts "Геопотенциальная высота: #{geopotential_height.round(0)}"
-    puts "Кинетическая температура: #{temperature.round(3)}"
-    puts "Давление: #{pressure.round(2)}"
-    puts "Плотность: #{density.round(5)}" #нужно быть аккуратным при большой высоте - округляет до 1.0e-05
-    puts "Ускорение свободного падения: #{acceleration_free_fall.round(4)}"
-    puts "Скорость звука: #{sound_velocity.round(2)}"
+    output_parameters = []
+    output_parameters << "Геопотенциальная высота: #{geopotential_height.round(0)}"
+    output_parameters << "Кинетическая температура: #{temperature.round(3)}"
+    output_parameters << "Давление: #{pressure.round(2)}"
+    output_parameters << "Плотность: #{density.round(5)}" #нужно быть аккуратным при большой высоте - округляет до 1.0e-05
+    output_parameters << "Ускорение свободного падения: #{acceleration_free_fall.round(4)}"
+    output_parameters << "Скорость звука: #{sound_velocity.round(2)}"
+
+    output_parameters
   end
 end
