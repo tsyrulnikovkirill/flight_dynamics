@@ -1,12 +1,18 @@
 require_relative 'constants'
 
 def line_interpolation(x, x_data, y_data)
-  n = x_data.size
-  (0...n).each do |index|
-    if (x_data[index]..x_data[index + 1]).include?(x)
-      a1 = (y_data[index + 1] - y_data[index]) / (x_data[index + 1] - x_data[index])
-      a0 = y_data[index] - a1 * x_data[index]
-      return a0 + a1 * x
+  n = x_data.size - 1
+  if n == 1
+    a1 = (y_data[1] - y_data[0]) / (x_data[1] - x_data[0])
+    a0 = y_data[1] - a1 * x_data[0]
+    a0 + a1 * x
+  else
+    (0...n).each do |index|
+      if (x_data[index]..x_data[index + 1]).include?(x)
+        a1 = (y_data[index + 1] - y_data[index]) / (x_data[index + 1] - x_data[index])
+        a0 = y_data[index] - a1 * x_data[index]
+        return a0 + a1 * x
+      end
     end
   end
 end
