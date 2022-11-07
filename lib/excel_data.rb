@@ -29,6 +29,6 @@ class ExcelData
   end
 
   def save
-    @p.serialize '_Результаты расчета_.xlsx'
+    @p.serialize 'data/_Результаты расчета_.xlsx'
   end
 end
