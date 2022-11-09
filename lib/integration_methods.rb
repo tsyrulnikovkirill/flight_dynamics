@@ -4,9 +4,9 @@ require_relative 'excel_data'
 
 def euler_method(dt, alpha_zero)
   if alpha_zero
-    is_angle = "α равен 0"
+    is_angle = "α = 0"
   else
-    is_angle = "α изменяется"
+    is_angle = "α изм."
   end
   excel = ExcelData.new("Эйлер при #{is_angle} с шагом #{dt}")
 
@@ -28,7 +28,7 @@ def euler_method(dt, alpha_zero)
   parameters = issue_parameters(n, t, v_new, y_new, x_new, tetta_new, tetta_c_new, wz_new)
   excel.create_line(parameters)
 
-  while t <= T_K - dt
+  while t <= T_K # -dt for 0.1, 0.01
     v_new = v_old + dt * dv_dt(v_old, y_old, tetta_old, tetta_c_old, t)
     tetta_c_new = tetta_c_old + dt * d_tetta_c_dt(v_old, y_old, tetta_old, tetta_c_old, t)
     x_new = x_old + dt * dx_dt(v_old, tetta_c_old)
@@ -59,7 +59,6 @@ def euler_method(dt, alpha_zero)
       n += 1
       parameters = issue_parameters(n, T_1, v_1, y_1, x_1, tetta_1, tetta_c_1, wz_1)
       excel.create_line(parameters)
-      puts 'OK'
     end
 
     v_old = v_new
@@ -70,10 +69,16 @@ def euler_method(dt, alpha_zero)
     wz_old = wz_new
 
     t += dt
-    n += 1
+    t = t.round(3)
 
-    parameters = issue_parameters(n, t, v_new, y_new, x_new, tetta_new, tetta_c_new, wz_new)
-    excel.create_line(parameters)
+    k = t * 10
+    k = k.to_s.split('.').first.to_i
+
+    if k / t / 10 == 1 or t == 4.73
+      n += 1
+      parameters = issue_parameters(n, t, v_new, y_new, x_new, tetta_new, tetta_c_new, wz_new)
+      excel.create_line(parameters)
+    end
   end
 
   excel.create_sheet
@@ -81,6 +86,28 @@ def euler_method(dt, alpha_zero)
 end
 
 def modify_euler_method
+  if alpha_zero
+    is_angle = "α = 0"
+  else
+    is_angle = "α изм."
+  end
+  excel = ExcelData.new("Эйлер при #{is_angle} с шагом #{dt}")
+
+  t = 0
+  v_old = V_0
+  v_new = V_0
+  tetta_c_old = TETTA_C0
+  tetta_c_new = TETTA_C0
+  tetta_old = TETTA_0
+  tetta_new = TETTA_0
+  x_old = X_0
+  x_new = X_0
+  y_old = Y_0
+  y_new = Y_0
+  wz_old = WZ0
+  wz_new = WZ0
+  n = 0
+
 
 end
 
