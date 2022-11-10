@@ -4,7 +4,7 @@ def line_interpolation(x, x_data, y_data)
   n = x_data.size - 1
   if n == 1
     a1 = (y_data[1] - y_data[0]) / (x_data[1] - x_data[0])
-    a0 = y_data[1] - a1 * x_data[0]
+    a0 = y_data[0] - a1 * x_data[0]
     a0 + a1 * x
   else
     (0...n).each do |index|

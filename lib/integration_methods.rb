@@ -123,7 +123,7 @@ def modify_euler_method(dt, alpha_zero)
     else
       tetta_new = tetta_old + dt * d_tetta_dt(wz_old + dwz / 2)
       wz_new = wz_old + dt * dwz_dt(v_old + dv / 2, y_old + dy / 2,
-                                    tetta_old + d_tetta / 2, tetta_old + d_tetta_c / 2)
+                                    tetta_old + d_tetta / 2, tetta_c_old + d_tetta_c / 2)
     end
 
     if dt == 0.1 && (t + dt) > T_1 && t < T_K

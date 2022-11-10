@@ -3,7 +3,7 @@ def to_radian(angle)
 end
 
 def degrees(angle)
-  angle * Math::PI / 180
+  angle / Math::PI * 180
 end
 
 #табличные значения маха и коэффицентов
