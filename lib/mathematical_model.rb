@@ -3,7 +3,6 @@ require_relative 'atmosphere_parameters'
 require_relative 'approximation_methods'
 
 #вспомогательные уравнения
-#угол атаки
 def alpha(tetta, tetta_c)
   tetta - tetta_c
 end
